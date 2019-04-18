@@ -18,8 +18,9 @@ class TickerBuilder:
         #for key in respjson.keys(): 
         #    print(key)
         datajson = respjson["data"]
+        #print(datajson)
         for data in datajson:
-            print(data["date"]+ ": " + str(data["average"]) )
+            print(data["date"]+ ": " + str(data["open"] )+ ": " + str(data["close"]) )
 
     #def interpretDType(self):
     #    if(self.datatype == "Market Price"):
