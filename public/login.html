@@ -20,11 +20,21 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <!-- CSS  stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styleLogin.css">
 
 </head>
 
 <body>
+    <script>
+        function login()
+        {
+            var email = document.getElementById("em");
+        }
+        function createAccount()
+        {
+
+        }
+    </script>
   
 <div class="myNavbar">
   <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
@@ -40,11 +50,18 @@
 </div>
   <div id="home" class="container-fluid">
     <h3 id="title" class="text-left">Login</h3>
-    <div id="form" class="container-fluid">
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+    <div id="form" class="container-fluid text-center">
+        <form>
+        <ul>
+            <li><label for="email"><b>Email</b></label></li>
+            <li><input id="em" type="text" placeholder="Enter Email" name="email" required></li>
+            <li><label for="psw"><b>Password</b></label></li>
+            <li><input id="pass" type="password" placeholder="Enter Password" name="psw" required></li>
+            
+        </ul>
+    </form>
+        <button href="lb" onclick="login()" type="button" class="btn btn-success">Login</button>
+        <button href="createA" onclick="createAccount()" type="button" class="btn btn-light">Create Account</button>
     </div>
     <svg  viewBox="0 0 100 100" preserveAspectRatio="none">
       <polygon fill="white" points="0,100 100,0 100,100"/>

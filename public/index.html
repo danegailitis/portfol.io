@@ -25,24 +25,27 @@
 </head>
 
 <body>
-  <!-- Set up Facebook Javascript SDK-->
   
-
-  <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top" id=myNavbar>
+<div class="myNavbar">
+  <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
     <a class="navbar-brand" href="#home">Portfol.io</a>
     <ul class="navbar-nav" >
     <li class="nav-item">
       <a class="nav-link" href="#about">About</a>
+    </li>
+      <li class="nav-item">
+      <a href="login.html" class="nav-link">Login</a>
+      </li>
     </ul>
+    
   </nav>
-
+</div>
   <div id="home" class="container-fluid">
-    <h1 class="text-center">Portfol.io</h1>
-    <!--
-      Below we include the Login Button social plugin. This button uses
-      the JavaScript SDK to present a graphical Login button that triggers
-      the FB.login() function when clicked.
-    -->
+    <h1 id="title" class="text-center">Portfol.io</h1>
+    <svg  viewBox="0 0 100 100" preserveAspectRatio="none">
+      <polygon fill="white" points="0,100 100,0 100,100"/>
+    </svg>
+ 
    
 
     <div id="status">
@@ -52,6 +55,8 @@
     </div>
 
   </div>
+
+  
 
   <div id="about" class="container-fluid">
     <h1>About</h1>

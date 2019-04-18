@@ -6,6 +6,9 @@ body{
 #title{
     font: 75px "Arial";
 }
+.myNavbar{
+    background-color:transparent;
+}
 #home
 {
     padding-top: 50px;
@@ -20,4 +23,5 @@ svg {
     bottom: 0;
     width: 100%;
     height: 10vw;
+    fill: rgb(2, 147, 43);
   }
