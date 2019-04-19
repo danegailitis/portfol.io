@@ -36,11 +36,29 @@
             firebase.auth().signInWithEmailAndPassword(email, passw).catch(function(error) 
             {
                 // Handle Errors here.
+               // var app = auth.app;
+
                 var errorCode = error.code;
                 var errorMessage = error.message;
+                if (email == "" || passw == "")
+                {
+                    alert("Fill in all required fields");
+                }
+                else if (errorCode == "auth/user-not-found" || errorCode == "auth/wrong-password")
+                {
+                    alert("Incorrect user or password");
+                }
+                else
+                {
+                    alert("Success");
+                }
+                
+                //var errorMessage = error.message;
                 // ...
             });
-            alert("Success");
+            
+            document.getElementById("em").value = "";
+            document.getElementById("pass").value = "";
         }
         function createAccount()
         {
@@ -53,21 +71,33 @@
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
+                if (email == "" || passw == "")
+                {
+                    alert("Fill in all required fields");
+                }
+                else if (errorCode == "auth/email-already-in-use")
+                {
+                    alert("Email already in use");
+                }
+                else if (errorCode == "auth/invalid-email")
+                {
+                    alert("Email invalid");
+                }
+                else
+                {
+                    alert("Success");
+                }
                 // ...
             });
-            alert("Success");
+            document.getElementById("em").value = "";
+            document.getElementById("pass").value = "";
         }
     </script>
   
 <div class="myNavbar">
-  <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
+  <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top shadow-sm">
     <a class="navbar-brand" href="#home">Portfol.io</a>
-    <ul class="navbar-nav" >
-    <li class="nav-item">
-      <a class="nav-link" href="#about">About</a>
-    </li>
-     
-    </ul>
+    
     
   </nav>
 </div>
