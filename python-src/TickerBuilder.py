@@ -11,16 +11,15 @@ class TickerBuilder:
         self.datatype = datatype
     
     def getMPrice(self):
-        mresp = requests.get("https://api.iextrading.com/1.0/stock/" 
-            + self.ticker + 
-            "/chart/dynamic")
+        mresp = requests.get("https://api.iextrading.com/1.0/stock/aapl/batch?types=quote,stats,company,news,chart&range=5y");
         respjson = mresp.json() #keys range and data
         #for key in respjson.keys(): 
         #    print(key)
-        datajson = respjson["data"]
+        datajson = respjson["chart"];
+        print(datajson)
         #print(datajson)
-        for data in datajson:
-            print(data["date"]+ ": " + str(data["open"] )+ ": " + str(data["close"]) )
+        #for data in datajson:
+         #   print(data["date"]+ ": " + str(data["open"] )+ ": " + str(data["close"]) )
 
     #def interpretDType(self):
     #    if(self.datatype == "Market Price"):

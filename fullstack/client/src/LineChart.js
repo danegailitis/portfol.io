@@ -1,8 +1,37 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
-class LineChart extends Component {
-  data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+import DataRequest from './DataRequest';
+
+
+export default  class LineChart extends Component {
+
+  componentDidMount() {
+      const { datasets } = getData();
+      console.log(datasets[0].data);
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Line Example</h2>
+        <Line ref="chart" data={getData()}/>
+      </div>
+    );
+  }
+}
+
+
+function getData() {
+  var dr = new DataRequest('aapl');
+  dr.initData();
+    var xlabels = dr.dates;
+    var yvals = dr.values;
+
+
+  //console.log(dr.dates);
+
+  var data = {
+    labels: xlabels,
     datasets: [
       {
         label: 'My First dataset',
@@ -23,24 +52,9 @@ class LineChart extends Component {
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [65, 59, 80, 81, 56, 55, 40]
+        data: yvals
       }
     ]
   };
-
-  
-
-  render() {
-    return (
-      <div>
-        <h2>Line Example</h2>
-        <Line ref="chart" data={this.data}/>
-      </div>
-    );
-  }
-  componentDidMount() {
-    const { datasets } = this.data;
-    console.log(datasets[0].data);
-  }
+  return data;
 }
-export default LineChart;
