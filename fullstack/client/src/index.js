@@ -16,5 +16,6 @@ if ('serviceWorker' in navigator) {
         });
 }
 
-ReactDOM.render(<LineChart />, document.getElementById('root'));
+var ctx = document.getElementById("root");
+ReactDOM.render(<LineChart />, ctx);
 
