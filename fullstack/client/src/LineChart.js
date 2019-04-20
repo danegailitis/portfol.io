@@ -7,7 +7,8 @@ import DataBuilder from './DataBuilder';
 export default class LineChart extends Component {
   constructor(props){
     super(props);
-    this.db = new DataBuilder();
+    var ticker = 'aapl'; //need backend hook
+    this.db = new DataBuilder(ticker);
     this.state = this.db.data;
   }
 
@@ -20,7 +21,6 @@ export default class LineChart extends Component {
 
   componentWillUnmount() {
   }
-  
   render() {
     var chartdata= this.state;
       return(
