@@ -24,7 +24,7 @@ export default class LineChart extends Component {
   render() {
     var chartdata= this.state;
       return(
-        <div>
+        <div className = "myChart">
         <h2>Line Example</h2>
         <Line data={chartdata}
           ref="chart"

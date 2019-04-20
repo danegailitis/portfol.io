@@ -15,7 +15,6 @@ if ('serviceWorker' in navigator) {
             console.log('Registration failed with ' + error);
         });
 }
-
-var ctx = document.getElementById("root");
+var ctx = document.getElementById("myChart");
 ReactDOM.render(<LineChart />, ctx);
 
