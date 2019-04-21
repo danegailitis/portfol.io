@@ -9,7 +9,7 @@
     }
   ],
   "homepage": "localhost:3001",
-  "start_url": "C:\\Users\\Zach\\Documents\\GitHub\\SecMongo\\portfol.io\\fullstack\\server\\index.html",
+  "start_url": "C:\\Users\\Zach\\Documents\\GitHub\\portfol.io\\fullstack\\server\\index.html",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
