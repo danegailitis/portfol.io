@@ -7,7 +7,7 @@ var express = require("express");
     res.sendFile('/Users/danegailitis/Projects/portfolio/public/index.html')
  });
 
-  app.get("/profile",function(req,res){
+  app.post("/profile",function(req,res){
       res.sendFile("/Users/danegailitis/Projects/portfolio/public/personal.html");
   });
 

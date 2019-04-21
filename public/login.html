@@ -51,7 +51,7 @@
                 else
                 {
                     alert("Success");
-                    document.getElementById("myform").submit();
+                    document.getElementById("middleman").submit();
                     
                 }
                 
@@ -89,7 +89,7 @@
                 {
 
                     alert("Success");
-                    document.getElementById("myform").submit();
+                    document.getElementById("middleman").submit();
                 }
                 // ...
             });
@@ -108,7 +108,7 @@
   <div id="home" class="container-fluid">
     <h3 id="title" class="text-left">Login</h3>
     <div id="form" class="container-fluid text-center">
-        <form id="myform" method="PUT" action="/profile">
+        <form id="myform" method="post" action="/profile">
         <ul>
             <li><label for="email"><b>Email</b></label></li>
             <li><input id="em" type="text" placeholder="Enter Email" name="email" required></li>
@@ -117,9 +117,13 @@
             
         </ul>
     
-        <button href="lb" onclick="login()" type="button" class="btn btn-success">Login</button>
-        <button href="createA" onclick="createAccount()" type="button" class="btn btn-light">Create Account</button>
+        <button href="lb" onclick="login();" type="button" class="btn btn-success">Login</button>
+        <button href="createA" onclick="createAccount();" type="button" class="btn btn-light">Create Account</button>
+        
     </form>
+    <form id="middleman" method="post" action="/profile">
+    </form>
+    
     </div>
     <svg  viewBox="0 0 100 100" preserveAspectRatio="none">
       <polygon fill="white" points="0,100 100,0 100,100"/>
