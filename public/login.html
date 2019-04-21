@@ -3,7 +3,8 @@
 <title>Portfol.io</title>
 <head>
   
- <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-database.js"></script>
  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
 <script>
@@ -18,10 +19,48 @@
   };
   firebase.initializeApp(config);
 </script>
+
+
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <!-- CSS  stylesheet -->
-  <link rel="stylesheet" href="styleLogin.css">
+  
+  <style>
+      body{
+    background-color: rgb(0, 154, 201);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(46, 46, 46);
+}
+#title{
+    font: 75px "Arial";
+}
+.myNavbar{
+    background-color:transparent;
+}
+#home
+{
+    padding-top: 50px;
+    height:100vh;
+}
+ul{
+    list-style: none;
+}
+::placeholder{
+    color: rgb(0, 154, 201);
+}
+#about
+{
+    padding-bottom: 40px;
+}
+svg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10vw;
+    fill: rgb(2, 147, 43);
+  }
+  </style>
 
 </head>
 
@@ -32,33 +71,36 @@
             var email = document.getElementById("em").value;
             
             var passw = document.getElementById("pass").value;
+         
             
-            firebase.auth().signInWithEmailAndPassword(email, passw).catch(function(error) 
+            firebase.auth().signInWithEmailAndPassword(email, passw).then(function(user)
             {
-                // Handle Errors here.
-               // var app = auth.app;
-
+               // console.log(user);
+                document.getElementById("myform").submit();
+            })
+            .catch(function(error)
+            {
                 var errorCode = error.code;
                 var errorMessage = error.message;
+               // alert(errorMessage);
                 if (email == "" || passw == "")
                 {
+                    
                     alert("Fill in all required fields");
                 }
                 else if (errorCode == "auth/user-not-found" || errorCode == "auth/wrong-password")
                 {
                     alert("Incorrect user or password");
                 }
-                else
-                {
-                    alert("Success");
-                    document.getElementById("middleman").submit();
-                    
+                else{
+                    alert(errorMessage);
                 }
                 
                 //var errorMessage = error.message;
-                // ...
             });
             
+                    
+
             document.getElementById("em").value = "";
             document.getElementById("pass").value = "";
         }
@@ -68,7 +110,11 @@
            
             var passw = document.getElementById("pass").value;
             
-            firebase.auth().createUserWithEmailAndPassword(email, passw).catch(function(error) 
+            firebase.auth().createUserWithEmailAndPassword(email, passw).then(function(user)
+            {
+                document.getElementById("myform").submit();
+            })
+            .catch(function(error) 
             {
                 // Handle Errors here.
                 var errorCode = error.code;
@@ -88,8 +134,8 @@
                 else
                 {
 
-                    alert("Success");
-                    document.getElementById("middleman").submit();
+                    alert(errorMessage);
+                    
                 }
                 // ...
             });
@@ -97,6 +143,7 @@
             document.getElementById("pass").value = "";
         }
     </script>
+    
   
 <div class="myNavbar">
   <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top shadow-sm">
@@ -117,11 +164,11 @@
             
         </ul>
     
-        <button href="lb" onclick="login();" type="button" class="btn btn-success">Login</button>
-        <button href="createA" onclick="createAccount();" type="button" class="btn btn-light">Create Account</button>
+        <button href="lb" onclick="login()" type="button" class="btn btn-success">Login</button>
+        <button href="createA" onclick="createAccount()" type="button" class="btn btn-light">Create Account</button>
         
     </form>
-    <form id="middleman" method="post" action="/profile">
+    <form id="middleman" method="get" action="/login">
     </form>
     
     </div>

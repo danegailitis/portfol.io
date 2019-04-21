@@ -1,18 +1,23 @@
 
 var express = require("express");
+var path = require("path");
  var app = express();
+ //app.use(express.static(__dirname + '/public'));
 
  /* serves main page */
  app.get("/", function(req, res) {
-    res.sendFile('/Users/danegailitis/Projects/portfolio/public/index.html')
+     var mypath = path.join(__dirname+"/../");
+    res.sendFile(mypath+'/index.html');
  });
 
   app.post("/profile",function(req,res){
-      res.sendFile("/Users/danegailitis/Projects/portfolio/public/personal.html");
+      var mypath = path.join(__dirname+"/../");
+      res.sendFile(mypath+"/personal.html");
   });
 
   app.get("/login",function(req,res){
-    res.sendFile("/Users/danegailitis/Projects/portfolio/public/login.html");
+    var mypath = path.join(__dirname+"/../");
+    res.sendFile(mypath+"/login.html");
 });
 
  /* serves all the static files */
