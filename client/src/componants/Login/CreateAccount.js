@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Firebase from '../Firebase/firebase';
+import firebase from 'firebase';
 import { Link, withRouter } from 'react-router-dom';
 
 
@@ -38,7 +39,7 @@ class CreateAccount extends Component {
     createAccount() {
         var email = document.getElementById("em").value;
         var passw = document.getElementById("pass").value;
-        this.fb.doCreateUserWithEmailAndPassword(email, passw).then(function (user) {
+        firebase.auth().createUserWithEmailAndPassword(email, passw).then(function (user) {
             
             document.location.href = "/profile";
         })
@@ -56,7 +57,6 @@ class CreateAccount extends Component {
             }
             else {
                 alert(errorMessage);
-                document.location.href = "/profile";
                 //props.history.push(ROUTES.PROFILE);
             }
         });

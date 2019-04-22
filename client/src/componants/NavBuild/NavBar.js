@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 const style = require('./style.css');
-export class NavBuild extends Component {
+export class NavBar extends Component {
   render() {
     return (
       <div className = {style}>
@@ -22,4 +22,4 @@ export class NavBuild extends Component {
 }
 
 
-export default NavBuild;
+export default NavBar
