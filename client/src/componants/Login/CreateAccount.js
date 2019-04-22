@@ -38,8 +38,11 @@ class CreateAccount extends Component {
     createAccount() {
         var email = document.getElementById("em").value;
         var passw = document.getElementById("pass").value;
-        this.fb.doCreateUserWithEmailAndPassword(email, passw).catch(function (error) {
-            // Handle Errors here.
+        this.fb.doCreateUserWithEmailAndPassword(email, passw).then(function (user) {
+            
+            document.location.href = "/profile";
+        })
+        .catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             if (email === "" || passw === "") {
@@ -52,7 +55,7 @@ class CreateAccount extends Component {
                 alert("Email invalid");
             }
             else {
-                alert("Success");
+                alert(errorMessage);
                 document.location.href = "/profile";
                 //props.history.push(ROUTES.PROFILE);
             }
