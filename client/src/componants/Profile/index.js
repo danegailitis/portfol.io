@@ -1,13 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LineChart from '../Chart/LineChart';
+import LineChart from '../Chart/index'
 import NavBuild from '../NavBuild/index';
-
 
 //import serviceWorker from './serviceWorker';
 
 class Profile extends React.Component{
-  render(){
+  constructor(props){
+    super(props);
+    this.state = {ticker: ""};
+
+  this.handleChange = this.handleChange.bind(this);
+  this.handleSubmit = this.handleSubmit.bind(this);
+  this.stockchart = new LineChart();
+}
+
+handleChange(event) {
+  this.setState({
+    [event.target.id]: event.target.value
+  });
+}
+
+fireBaseAuth() {
+  //return signIn(this.state.username);
+}
+
+handleSubmit(event) {
+  //authenticator.signIn
+  event.preventDefault();
+}
+
+render(){
+  //this.stockchart.initialize("aapl");
     return(
       < div >
         <NavBuild />
