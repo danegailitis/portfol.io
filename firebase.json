@@ -9,5 +9,19 @@
       "**/.*",
       "**/node_modules/**"
     ]
-  }
+  },
+  "rewrites": [
+    {
+        "source": "/login",
+        "destination": "app"
+    },
+    {
+      "source": "/profile",
+      "destination": "app"
+    },
+    {
+      "source": "/",
+      "destination": "app"
+    }
+  ]
 }
