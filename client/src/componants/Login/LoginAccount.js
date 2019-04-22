@@ -26,7 +26,10 @@ class LoginAccount extends Component {
         var email = document.getElementById("em").value;
         var passw = document.getElementById("pass").value;
 
-        firebase.auth().signInWithEmailAndPassword(email, passw).catch(function (error) {
+        firebase.auth().signInWithEmailAndPassword(email, passw).then(function (user) {
+            document.location.href = "/profile";
+        })
+        .catch(function (error){
             var errorCode = error.code;
             var errorMessage = error.message;
             if (email === "" || passw === "") {
@@ -36,8 +39,8 @@ class LoginAccount extends Component {
                 alert("Incorrect user or password");
             }
             else {
-                alert("Success");
-                document.location.href = "/profile";
+                alert(errorMessage);
+                
             }
         });
         document.getElementById("em").value = "";
