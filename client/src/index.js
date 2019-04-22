@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 import App from './componants/App';
@@ -18,5 +17,6 @@ ReactDOM.render(
     </FirebaseContext.Provider>,
     document.getElementById('root'),
 );
+//FirebaseContext.Provider
 
 serviceWorker.unregister();

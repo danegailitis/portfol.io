@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
 
+import React, { Component } from 'react';
+const style = require('./style.css');
 export class NavBuild extends Component {
   render() {
     return (
+      <div className = {style}>
       <div class="myNavbar">
         <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top shadow-sm">
           <a class="navbar-brand" href="/home">Portfol.io</a>
@@ -13,6 +15,7 @@ export class NavBuild extends Component {
           </ul>
 
         </nav>
+      </div>
       </div>
     )
   }
