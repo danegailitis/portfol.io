@@ -1,5 +1,8 @@
-import app from 'firebase/app';
-import 'firebase/auth'
+import * as firebase from 'firebase';
+import 'firebase/auth';
+require ('firebase/firestore');
+
+
 var config = {
   apiKey: "AIzaSyDGubZDh62pQ3I0_7RDlvcCMick4I9zMwM",
   authDomain: "portfolio-280dd.firebaseapp.com",
@@ -9,12 +12,11 @@ var config = {
   messagingSenderId: "402005994401"
 };
 
-class Firebase {
+export default class Firebase {
   constructor() {
-    app.initializeApp(config);
-    this.auth = app.auth();
+    firebase.initializeApp(config);
+    this.auth = firebase.auth();
   } 
-  
   createUser(email, password) {
     this.auth.doCreateUserWithEmailAndPassword(email,password);
   }
@@ -25,6 +27,3 @@ class Firebase {
     this.auth.signOut(email, password);
   }
 }
-
-
-export default Firebase;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-import { Firebase } from '../Firebase';
+import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
 
@@ -32,7 +32,7 @@ class handleCreate{
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.authenticator = new Firebase;
+    //this.authenticator = ;
     this.state = { 
       username: "",
       password: ""
@@ -49,11 +49,11 @@ class Login extends Component {
   }
 
   fireBaseAuth() {
-    return authenticator.signIn(this.state.username);
+    //return signIn(this.state.username);
   }
 
   handleSubmit(event) {
-    authenticator.signIn
+    //authenticator.signIn
     event.preventDefault();
   }
 
@@ -70,12 +70,12 @@ class Login extends Component {
   }
 }
 
-ReactDOM.render(
-  <NameForm />,
-  document.getElementById('root')
-);
+//ReactDOM.render(
+  //<NameForm />,
+  //document.getElementById('root')
+//);
 
-class Form extends Component {
+/*class Form extends Component {
   render (){
 
   }
@@ -107,4 +107,4 @@ const listItems {
 
     <li><input id="pass" type="password" placeholder="Enter Password" name="psw" required></li>
 }
-        <form id="myform" method="post" action="/profile"></form>
+        <form id="myform" method="post" action="/profile"></form>*/
