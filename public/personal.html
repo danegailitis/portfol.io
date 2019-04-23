@@ -80,21 +80,20 @@
     </nav>
   </div>
   <div id="home" class="container-fluid">
-    <h1 id="profile" class="text-center">Profile</h1>
+    <h1 id="profile" class="text-center"></h1>
     <div>
       <canvas id="myChart"></canvas>
     </div>
     <svg viewBox="0 0 100 100" preserveAspectRatio="none">
       <polygon fill="white" points="0,100 100,0 100,100" />
     </svg>
-    <h3 id="uname" class="text-center">Welcome!</h3>
 
     <script>
       function displayUser() {
         firebase.auth().onAuthStateChanged(function (user) {
           if (user) {
             console.log(user.email);
-            var section = document.getElementById("uname");
+            var section = document.getElementById("profile");
             section.innerHTML = user.email;
           }
         });
@@ -154,7 +153,7 @@
 
       function dataUpdate(ticker) {
         buildData(ticker).then(dataJson => {
-          var newdata = genNewData(dataJson);
+          var newdata = genNewData(dataJson, ticker);
           createChart(newdata);
           // alert(dataJson.chart[0].date);
         }).catch(err => {
@@ -162,6 +161,19 @@
         });
 
       }
+      function update(ticker) {
+        buildData(ticker).then(dataJson => {
+          var newdata = genNewData(dataJson, ticker);
+          chart = window.chart;
+          chart.data = newdata;
+          chart.update();
+          chart.render();
+                  // alert(dataJson.chart[0].date);
+          }).catch(err => {
+              alert(err);
+          });
+
+        }
       async function buildData(ticker) {
         var endpoint = `https://api.iextrading.com/1.0/stock/${ticker}/batch?types=quote,stats,company,news,chart&range=1y`;
         const res = await fetch(endpoint);
@@ -170,7 +182,7 @@
         return dataJson;
       }
 
-      function genNewData(dataJson) {
+      function genNewData(dataJson, ticker) {
         var x = [];
         var y = [];
         for (let i = 0; i < dataJson.chart.length; i++) {
@@ -180,34 +192,39 @@
         var newdata = default_data;
         newdata.labels = x;
         newdata.datasets[0].data = y;
+        newdata.datasets[0].label = ticker.toUpperCase();
         return newdata;
       }
-
+      function updateChart (params) {
+        
+      }
       function createChart(data) {
-        alert(data.labels);
+        //alert(data.labels);
         var ctx = document.getElementById("myChart");
         try {
           var myLineChart = new Chart(ctx, {
             type: 'line',
             data: data
           });
+          window.chart = myLineChart;
         } catch (error) {
           alert(error);
         }
       }
 
-      function Drawchart(ticker) {
+      function drawChart(ticker) {
         dataUpdate(ticker);
       }
       function onClick() {
-        ticker = document.getElementById("ticker");
-        alert(ticker);
+        ticker = document.getElementById("ticker").value.toLowerCase();
+        update(ticker);
 
       }
-      window.addEventListener('load', Drawchart('aapl'));
+      window.addEventListener('load', drawChart('aapl'));
     </script>
     <input id="ticker" type="text" label="ticker" placeholder="Enter Stock Ticker" name="search" required></input>
     <button onClick=onClick()>Search</button>
+    
 </body>
 
 </html>
