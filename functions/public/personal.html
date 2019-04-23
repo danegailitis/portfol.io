@@ -247,9 +247,17 @@
           });
           return stocks;
       }
+    
+      var myobject = getStocks();
+      var select = document.getElementById("example-select");
+      for(index in myobject) {
+        select.options[select.options.length] = new Option(myobject[index], index);
+      }
 
       window.addEventListener('load', drawChart('aapl'));
     </script>
+    <select id="example-select"></select>
+
     <input id="ticker" type="text" label="ticker" placeholder="Enter Stock Ticker" name="search" required></input>
     <button onClick=onClick()>Search</button>
     
