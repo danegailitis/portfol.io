@@ -33,36 +33,8 @@ const default_data = {
 export default class LineChart extends Component {
     constructor(props) {
         super(props);
-        //var u = new YourStocks();
-        //u.getUid();
         this.ticker = "aapl";
         this.state = default_data;
-        /*this.state.datasets[1] = 
-            {
-                label: "chart2",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(75,192,192,1)',
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: 'rgba(75,192,192,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-                pointHoverBorderColor: 'rgba(220,220,220,1)',
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: []
-            };
-            this.genNewLine('vz', 1);*/
-
-    
-        //this.props = props;
         this.tickerSearch = this.tickerSearch.bind(this);
     }
     
@@ -131,6 +103,7 @@ export default class LineChart extends Component {
         newdata.datasets[0].data = y;
         return newdata;
     }
+    
 
     /*genNewLine(ticker, index){
         this.buildData(ticker).then(dataJson => {
