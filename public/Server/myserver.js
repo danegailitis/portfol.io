@@ -7,17 +7,17 @@ var path = require("path");
  /* serves main page */
  app.get("/", function(req, res) {
      var mypath = path.join(__dirname+"/../");
-    res.sendFile(mypath+'/index.html');
+   res.sendFile(__dirname+'/index.html');
  });
 
   app.post("/profile",function(req,res){
       var mypath = path.join(__dirname+"/../");
-      res.sendFile(mypath+"/personal.html");
+    res.sendFile(__dirname+"/personal.html");
   });
 
   app.get("/login",function(req,res){
     var mypath = path.join(__dirname+"/../");
-    res.sendFile(mypath+"/login.html");
+    res.sendFile(__dirname+"/login.html");
 });
 
  /* serves all the static files */

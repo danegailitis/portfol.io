@@ -8,12 +8,12 @@ const app = express();
 app.get('/', function(req, res) {
     console.log('event triggered for homepage');
     var mypath = path.join(__dirname+'/../');
-    res.sendFile(mypath+'/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/', function(req, res) {
     var mypath = path.join(__dirname+'/../');
-   res.sendFile(mypath+'/index.html'); // Testing
+    res.sendFile(__dirname+'/index.html'); // Testing
 });
 
  app.post('/profile',function(req,res){
