@@ -79,182 +79,179 @@
     </svg>
         
 
-
-    <script>
-      var currentUser;
-      function displayUser() {
-        firebase.auth().onAuthStateChanged(function (user) {
-          if (user) {
-            console.log(user.email);
-            var section = document.getElementById("profile");
-            section.innerHTML = user.email;
-            currentUser = user.uid;
-          }
-        });
-        var user = firebase.auth().currentUser;
-        if (user == null) {
-          user = "Nobody Signed in";
-        }
-
-        //document.getElementById("uname").value = "Welcome"+user;
-      }
-      function logout() {
-        firebase.auth().signOut().then(function () {
-          // Sign-out successful.
-          alert("User logged out");
-          document.getElementById("backToHome").submit();
-        }).catch(function (error) {
-          // An error happened.
-        });
-      }
-
-      const default_data = {
-        labels: [],
-        datasets: [
-          {
-            label: "chart",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: 'rgba(75,192,192,0.4)',
-            borderColor: 'rgba(75,192,192,1)',
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: 'rgba(75,192,192,1)',
-            pointBackgroundColor: '#fff',
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-            pointHoverBorderColor: 'rgba(220,220,220,1)',
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: []
-          }
-        ]
-      }
-
-
-      function tickerSearch(ticker) {
-        /*var ticker = document.getElementById("ticker").value;
-        ticker = ticker.toLowerCase();
-        document.getElementById("ticker").value = '';*/
-        dataUpdate(ticker);
-      }
-
-      function dataUpdate(ticker) {
-        buildData(ticker).then(dataJson => {
-          var newdata = genNewData(dataJson, ticker);
-          createChart(newdata);
-          // alert(dataJson.chart[0].date);
-        }).catch(err => {
-          alert("invalid ticker");
-        });
-
-      }
-      function update(ticker) {
-        buildData(ticker).then(dataJson => {
-          var newdata = genNewData(dataJson, ticker);
-          chart = window.chart;
-          chart.data = newdata;
-          chart.update();
-          chart.render();
-                  // alert(dataJson.chart[0].date);
-          }).catch(err => {
-              alert(err);
-          });
-
-        }
-      async function buildData(ticker) {
-        var endpoint = `https://api.iextrading.com/1.0/stock/${ticker}/batch?types=quote,stats,company,news,chart&range=1y`;
-        const res = await fetch(endpoint);
-        const dataJson = await res.json();
-        //var newdata = this.genNewData(dataJson);
-        return dataJson;
-      }
-
-      function genNewData(dataJson, ticker) {
-        var x = [];
-        var y = [];
-        for (let i = 0; i < dataJson.chart.length; i++) {
-          x.push(dataJson.chart[i].date);
-          y.push(dataJson.chart[i].close);
-        }
-        var newdata = default_data;
-        newdata.labels = x;
-        newdata.datasets[0].data = y;
-        newdata.datasets[0].label = ticker.toUpperCase();
-        return newdata;
-      }
-      function updateChart (params) {
-        
-      }
-      function createChart(data) {
-        //alert(data.labels);
-        var ctx = document.getElementById("myChart");
-        try {
-          var myLineChart = new Chart(ctx, {
-            type: 'line',
-            data: data
-          });
-          window.chart = myLineChart;
-        } catch (error) {
-          alert(error);
-        }
-      }
-
-      function drawChart(ticker) {
-        dataUpdate(ticker);
-      }
-      function onClick() {
-        ticker = document.getElementById("ticker").value.toLowerCase();
-        update(ticker);
-
-      }
-
-      function add(stock_id){
-        fstore.collection("users").doc(currentUser).collection('stock_list').doc(stock_id).set({
-          stock_id: stock_id
-        })
-        .then(function() {
-          console.log("Succes");
-        })
-        .catch(function(error) {
-          console.error("Error: ", error);
-        });
-      }
-
-      function getStocks() {
-          var stocks = [];
-          fstore.collection(user).doc(user_id).collection('stock_list').get().then(function(querySnapshot){
-            querySnapshot.forEach(function(doc) {
-                              alert("fourth");
-              var id = doc.data().stock_id
-              
-              var select = document.getElementById("example-select");
-              if(id != "required_dummy"){
-                  stocks.push(id);
-              }
-            });
-          });
-         for (index in stocks) {
-          select.options[select.options.length] = new Option(stocks[index], index);
-        }
-      }
-
-      window.addEventListener('load', drawChart('aapl'));
-
-      getStocks();
-  </script>
 <script src="/__/firebase/5.9.4/firebase-app.js"></script>
-<script src="/__/firebase/5.9.4/firebase-firestore.js"></script>
 <script src="/__/firebase/5.9.4/firebase-auth.js"></script>
+<script src="/__/firebase/5.9.4/firebase-firestore.js"></script>
 <script src="/__/firebase/init.js"></script>
 <script>
-let fstore = firebase.firestore();
+      let fstore = firebase.firestore();
 </script>
+<script>
+  var currentUser;
+  function displayUser() {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        console.log(user.email);
+        var section = document.getElementById("profile");
+        section.innerHTML = user.email;
+        currentUser = user.uid;
+      }
+    });
+    var user = firebase.auth().currentUser;
+    if (user == null) {
+      user = "Nobody Signed in";
+    }
 
+    //document.getElementById("uname").value = "Welcome"+user;
+  }
+  function logout() {
+    firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+      alert("User logged out");
+      document.getElementById("backToHome").submit();
+    }).catch(function (error) {
+      // An error happened.
+    });
+  }
+
+  const default_data = {
+    labels: [],
+    datasets: [
+      {
+        label: "chart",
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: []
+      }
+    ]
+  }
+
+
+  function tickerSearch(ticker) {
+    /*var ticker = document.getElementById("ticker").value;
+    ticker = ticker.toLowerCase();
+    document.getElementById("ticker").value = '';*/
+    dataUpdate(ticker);
+  }
+
+  function dataUpdate(ticker) {
+    buildData(ticker).then(dataJson => {
+      var newdata = genNewData(dataJson, ticker);
+      createChart(newdata);
+      // alert(dataJson.chart[0].date);
+    }).catch(err => {
+      alert("invalid ticker");
+    });
+
+  }
+  function update(ticker) {
+    buildData(ticker).then(dataJson => {
+      var newdata = genNewData(dataJson, ticker);
+      chart = window.chart;
+      chart.data = newdata;
+      chart.update();
+      chart.render();
+      // alert(dataJson.chart[0].date);
+    }).catch(err => {
+      alert(err);
+    });
+
+  }
+  async function buildData(ticker) {
+    var endpoint = `https://api.iextrading.com/1.0/stock/${ticker}/batch?types=quote,stats,company,news,chart&range=1y`;
+    const res = await fetch(endpoint);
+    const dataJson = await res.json();
+    //var newdata = this.genNewData(dataJson);
+    return dataJson;
+  }
+
+  function genNewData(dataJson, ticker) {
+    var x = [];
+    var y = [];
+    for (let i = 0; i < dataJson.chart.length; i++) {
+      x.push(dataJson.chart[i].date);
+      y.push(dataJson.chart[i].close);
+    }
+    var newdata = default_data;
+    newdata.labels = x;
+    newdata.datasets[0].data = y;
+    newdata.datasets[0].label = ticker.toUpperCase();
+    return newdata;
+  }
+  function updateChart(params) {
+
+  }
+  function createChart(data) {
+    //alert(data.labels);
+    var ctx = document.getElementById("myChart");
+    try {
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: data
+      });
+      window.chart = myLineChart;
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  function drawChart(ticker) {
+    dataUpdate(ticker);
+  }
+  function onClick() {
+    ticker = document.getElementById("ticker").value.toLowerCase();
+    update(ticker);
+
+  }
+
+  function add(stock_id) {
+    fstore.collection("users").doc(currentUser).collection('stock_list').doc(stock_id).set({
+      stock_id: stock_id
+    })
+      .then(function () {
+        console.log("Succes");
+      })
+      .catch(function (error) {
+        console.error("Error: ", error);
+      });
+  }
+
+  function getStocks() {
+    var stocks = [];
+    fstore.collection(user).doc(user_id).collection('stock_list').get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        alert("fourth");
+        var id = doc.data().stock_id
+
+        var select = document.getElementById("example-select");
+        if (id != "required_dummy") {
+          stocks.push(id);
+        }
+      });
+    });
+    for (index in stocks) {
+      select.options[select.options.length] = new Option(stocks[index], index);
+    }
+  }
+  window.addEventListener('load', drawChart('aapl'));
+
+  getStocks();
+</script>
     
 </body>
 
