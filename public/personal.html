@@ -220,6 +220,30 @@
         update(ticker);
 
       }
+
+      function add(stock_id, stock_name){
+        var database = firebase.firestore();
+        db.collection("users").doc(currentUserID).collection(stock_list).doc(stock_id).set({
+          stock_id: stock_id,
+          stock_name: stock_name
+        })
+        .then(function() {
+          console.log("Succes");
+        })
+        .catch(function(error) {
+          console.error("Error: ", error);
+        });
+      }
+
+      function getStocks(){
+          var database = firebase.firestore();
+          database.collection(user).doc(user_id).collection(stock_list).get().then(function(querySnapshot){
+            querySnapshot.forEach(function(doc) {
+              var id = doc.data().stock_id
+              var name = doc.data().stock_name;
+            });
+          });
+      }
       window.addEventListener('load', drawChart('aapl'));
     </script>
     <input id="ticker" type="text" label="ticker" placeholder="Enter Stock Ticker" name="search" required></input>
