@@ -8,7 +8,7 @@ var app = express();
 app.get('/', (req, res) => {
     console.log('event triggered for homepage');
     var mypath = path.join(__dirname+'/../');
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(mypath + '/index.html');
 });
 
 /*app.post('/', (req, res) => {
@@ -21,10 +21,11 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname+'/public/personal.html');
  });
 
- app.get('/login',(req,res) => {
+ app.post('/login',(req,res) => {
     console.log('event triggered for login');
-    const fullPath = path.normalize(__dirname + '/public/login.html');
-    res.sendFile(fullPath);
+    var mypath = path.join(__dirname+'../');
+    const fullPath = path.join(mypath + '/public/login.html');
+    res.sendFile(__dirname+'/public/login.html');
 });
 
 /* serves all the static files */

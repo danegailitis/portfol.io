@@ -2,12 +2,7 @@
   "database": {
     "rules": "database.rules.json"
   },
-  "functions": {
-    "predeploy": [
-      "npm --prefix ./functions/ run lint"
-    ],
-    "source": "functions"
-  },
+  
   "hosting": {
     "public": "public",
     "ignore": [
@@ -18,15 +13,15 @@
     "rewrites": [
       {
         "source": "/login",
-        "destination": "app"
+        "function": "app"
       },
       {
         "source": "/profile",
-        "destination": "app"
+        "function": "app"
       },
       {
         "source": "/",
-        "destination": "app"
+        "function": "app"
       }
     ]
   }
