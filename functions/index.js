@@ -5,19 +5,25 @@ const path = require("path");
 const app = express();
 
 
-app.get("/", function(req, res) {
-    var mypath = path.join(__dirname+"/../");
-   res.sendFile(mypath+'/public/index.html');
+app.get('/', function(req, res) {
+    console.log('event triggered for homepage');
+    var mypath = path.join(__dirname+'/../');
+    res.sendFile(mypath+'/index.html');
 });
 
- app.post("/profile",function(req,res){
-     var mypath = path.join(__dirname+"/../");
-     res.sendFile(mypath+"/public/personal.html");
+app.post('/', function(req, res) {
+    var mypath = path.join(__dirname+'/../');
+   res.sendFile(mypath+'/index.html'); // Testing
+});
+
+ app.post('/profile',function(req,res){
+    console.log('event triggered for profile');
+    res.sendFile(__dirname+'/public/personal.html');
  });
 
- app.get("/login",function(req,res){
-   var mypath = path.join(__dirname+"/../");
-   res.sendFile(mypath+"/public/login.html");
+ app.get('/login',function(req,res){
+    console.log('event triggered for login');
+    res.sendFile(__dirname+'/public/login.html');
 });
 
 /* serves all the static files */
@@ -28,7 +34,7 @@ app.get(/^(.+)$/, function(req, res){
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
-  console.log("Listening on " + port);
+  console.log('Listening on ' + port);
 });
 
 exports.app = functions.https.onRequest(app);

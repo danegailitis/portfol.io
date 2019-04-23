@@ -8,20 +8,20 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
-  },
-  "rewrites": [
-    {
+    ],
+    "rewrites": [
+      {
         "source": "/login",
         "destination": "app"
-    },
-    {
-      "source": "/profile",
-      "destination": "app"
-    },
-    {
-      "source": "/",
-      "destination": "app"
-    }
-  ]
+      },
+      {
+        "source": "/profile",
+        "destination": "app"
+      },
+      {
+        "source": "/",
+        "destination": "app"
+      }
+    ]
+  }
 }
