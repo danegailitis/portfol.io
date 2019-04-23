@@ -40,8 +40,13 @@ class CreateAccount extends Component {
         var email = document.getElementById("em").value;
         var passw = document.getElementById("pass").value;
         firebase.auth().createUserWithEmailAndPassword(email, passw).then(function (user) {
-            
-            document.location.href = "/profile";
+            if (user) {
+                alert(firebase.auth().currentUser.email);
+                document.location.href = "/profile";
+            }
+            else {
+                alert("err");
+            }
         })
         .catch(function (error) {
             var errorCode = error.code;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
+import YourStocks from './YourStocks';
 
 
 const default_data = {
@@ -32,8 +33,35 @@ const default_data = {
 export default class LineChart extends Component {
     constructor(props) {
         super(props);
+        //var u = new YourStocks();
+        //u.getUid();
         this.ticker = "aapl";
         this.state = default_data;
+        /*this.state.datasets[1] = 
+            {
+                label: "chart2",
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: 'rgba(75,192,192,0.4)',
+                borderColor: 'rgba(75,192,192,1)',
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: 'rgba(75,192,192,1)',
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+                pointHoverBorderColor: 'rgba(220,220,220,1)',
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: []
+            };
+            this.genNewLine('vz', 1);*/
+
+    
         //this.props = props;
         this.tickerSearch = this.tickerSearch.bind(this);
     }
@@ -43,9 +71,8 @@ export default class LineChart extends Component {
 
     componentDidMount() {
         window.addEventListener("resize", this.props.setRedraw, true);
-        this.buildData(this.ticker).then(newdata => {
-            this.setState(newdata);
-        });
+        this.dataUpdate(this.ticker);
+        
     }
     render() {
         return (
@@ -76,16 +103,20 @@ export default class LineChart extends Component {
 
     dataUpdate(ticker) {
         this.ticker=ticker;
-        this.buildData(ticker).then(newdata => {
+        this.buildData(ticker).then(dataJson => {
+            var newdata = this.genNewData(dataJson);
             this.setState(newdata);
+        }).catch(err => {
+            alert("invalid ticker");
         });
+
     }
     async buildData(ticker) {
         var endpoint = `https://api.iextrading.com/1.0/stock/${ticker}/batch?types=quote,stats,company,news,chart&range=1y`;
         const res = await fetch(endpoint);
         const dataJson = await res.json();
-        var newdata = this.genNewData(dataJson);
-        return newdata;
+        //var newdata = this.genNewData(dataJson);
+        return dataJson;
     }
 
     genNewData(dataJson) {
@@ -100,5 +131,22 @@ export default class LineChart extends Component {
         newdata.datasets[0].data = y;
         return newdata;
     }
+
+    /*genNewLine(ticker, index){
+        this.buildData(ticker).then(dataJson => {
+            if(dataJson){
+                var y = [];
+                for (let i = 0; i < dataJson.chart.length; i++) {
+                    y.push(dataJson.chart[i].close);
+                }
+                var newdata = this.state;
+                newdata.datasets[index].data = y;
+                this.setState(newdata);
+            }
+            else{
+                alert("er")
+            }
+        });
+    }*/
 
 }
