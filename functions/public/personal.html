@@ -89,12 +89,14 @@
     </svg>
 
     <script>
+      var currentUser;
       function displayUser() {
         firebase.auth().onAuthStateChanged(function (user) {
           if (user) {
             console.log(user.email);
             var section = document.getElementById("profile");
             section.innerHTML = user.email;
+            currentUser = user.uid;
           }
         });
         var user = firebase.auth().currentUser;
@@ -113,8 +115,6 @@
           // An error happened.
         });
       }
-    </script>
-    <script>
 
       const default_data = {
         labels: [],
@@ -220,6 +220,34 @@
         update(ticker);
 
       }
+
+      function add(stock_id){
+        var database = firebase.firestore();
+        db.collection("users").doc(currentUser).collection(stock_list).doc(stock_id).set({
+          stock_id: stock_id
+        })
+        .then(function() {
+          console.log("Succes");
+        })
+        .catch(function(error) {
+          console.error("Error: ", error);
+        });
+      }
+
+      function getStocks(){
+          var database = firebase.firestore();
+          var stocks = [];
+          database.collection(user).doc(user_id).collection(stock_list).get().then(function(querySnapshot){
+            querySnapshot.forEach(function(doc) {
+              var id = doc.data().stock_id
+              if(id != "required_dummy"){
+                  stocks.push(id);
+              }
+            });
+          });
+          return stocks;
+      }
+
       window.addEventListener('load', drawChart('aapl'));
     </script>
     <input id="ticker" type="text" label="ticker" placeholder="Enter Stock Ticker" name="search" required></input>
