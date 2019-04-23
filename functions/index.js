@@ -13,13 +13,8 @@ app.get('/', (req, res) => {
 
 /*app.post('/', (req, res) => {
     var mypath = path.join(__dirname+'/../');
-<<<<<<< HEAD
    res.sendFile(mypath+'/index.html'); // Testing
 });*/
-=======
-    res.sendFile(__dirname+'/index.html'); // Testing
-});
->>>>>>> 0c8099fafe800fed7f73c760e86084876aa5d3c7
 
  app.post('/profile',(req,res) => {
     console.log('event triggered for profile');
