@@ -70,9 +70,15 @@
     <div>
       <canvas id="myChart"></canvas>
     </div>
+            <input id="ticker" type="text" label="ticker" placeholder="Enter Stock Ticker" name="search" required></input>
+            <button onClick=onClick()>Search</button>
+            <select id="example-select"></select>
+  </div>
     <svg viewBox="0 0 100 100" preserveAspectRatio="none">
       <polygon fill="white" points="0,100 100,0 100,100" />
     </svg>
+        
+
 
     <script>
       var currentUser;
@@ -220,54 +226,39 @@
         });
       }
 
-      function getStocks(){
+      function getStocks() {
+          alert("seconds");
+          var auth = firebase.auth();
           var database = firebase.firestore();
           var stocks = [];
           database.collection(user).doc(user_id).collection(stock_list).get().then(function(querySnapshot){
             querySnapshot.forEach(function(doc) {
+                              alert("fourth");
               var id = doc.data().stock_id
+              
+              var select = document.getElementById("example-select");
               if(id != "required_dummy"){
                   stocks.push(id);
               }
+              for (index in stocks) {
+                select.options[select.options.length] = new Option(stocks[index], index);
+              }
             });
           });
-          return stocks;
-      }
-    
-      var myobject = getStocks();
-      var select = document.getElementById("example-select");
-      for(index in myobject) {
-        select.options[select.options.length] = new Option(myobject[index], index);
       }
 
       window.addEventListener('load', drawChart('aapl'));
-    </script>
-    <select id="example-select"></select>
 
-    <input id="ticker" type="text" label="ticker" placeholder="Enter Stock Ticker" name="search" required></input>
-    <button onClick=onClick()>Search</button>
+      getStocks();
+  </script>
+<script src="/__/firebase/5.9.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+<script src="/__/firebase/5.9.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-functions.js"></script>
+<script src="/__/firebase/5.9.4/firebase-auth.js"></script>
+<script src="/__/firebase/init.js"></script>
+
     
 </body>
 
 </html>
-
-<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
-
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDGubZDh62pQ3I0_7RDlvcCMick4I9zMwM",
-    authDomain: "portfolio-280dd.firebaseapp.com",
-    databaseURL: "https://portfolio-280dd.firebaseio.com",
-    projectId: "portfolio-280dd",
-    storageBucket: "portfolio-280dd.appspot.com",
-    messagingSenderId: "402005994401"
-  };
-  firebase.initializeApp(config);
-</script>
-<script src="/__/firebase/5.9.4/firebase-app.js"></script>
-<script src="/__/firebase/5.9.4/firebase-auth.js"></script>
-<script src="/__/firebase/5.9.4/firebase-firestore.js"></script>
-<script src="/__/firebase/init.js"></script>
