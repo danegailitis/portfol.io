@@ -121,7 +121,7 @@
         label: "chart",
         fill: false,
         lineTension: 0.1,
-        backgroundColor: 'rgba(75,192,192,0.4)',
+        backgroundColor: 'red',
         borderColor: 'rgba(75,192,192,1)',
         borderCapStyle: 'butt',
         borderDash: [],
@@ -215,8 +215,8 @@
   }
   function onClick() {
     ticker = document.getElementById("ticker").value.toLowerCase();
+    add(ticker);
     update(ticker);
-
   }
 
   function add(stock_id) {
@@ -233,7 +233,7 @@
 
   function getStocks() {
     var stocks = [];
-    fstore.collection(user).doc(user_id).collection('stock_list').get().then(function (querySnapshot) {
+    fstore.collection('user').doc(currentUser).collection('stock_list').get().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
         alert("fourth");
         var id = doc.data().stock_id
